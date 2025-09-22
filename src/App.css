@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  padding: 0;
+  /*height: 100vh;*/
+  /*display: flex;*/
+  justify-content: center;
+  align-items: center;
+  background-color: #272525; /* фон страницы */
+}
+
+.app-wrapper {
+  display: grid;
+  margin: 0 auto;
+  width: 1400px;
+
+  grid-template-areas:
+  'h h'
+  'n c';
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  background-color: burlywood;
+}
+
+.app-wrapper-content {
+    grid-area: c;
+    background-color:  burlywood;
+    padding: 20px;
+    color: #45321f;
+    font-size: 20px;
+    font-weight: bold;
+}
+/* ОБЩЕЕ */
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.contentImg {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    border-radius: 3%;
+    margin: 0  0 20px 0;
+}
+
+.kart {
+    width: 160px;
+    border-radius: 15px;
+}

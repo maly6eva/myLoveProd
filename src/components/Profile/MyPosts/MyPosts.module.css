@@ -1,0 +1,12 @@
+.textarea {
+    background-color: #d8d5cc;
+    border-radius: 15px;
+    color: black;
+}
+.description{
+    padding: 10px;
+}
+
+.post{
+    margin-top: 30px;
+}

@@ -1,0 +1,19 @@
+.nav {
+    grid-area: n;
+    background-color: burlywood;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu{
+    font-size: 30px;
+    font-weight: bold;
+    color: #45321f;
+}
+.activeLink {
+    font-size: 30px;
+    font-weight: bold;
+    color: yellow;
+}
