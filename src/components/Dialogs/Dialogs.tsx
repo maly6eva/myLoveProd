@@ -1,7 +1,12 @@
 import s from './Dialogs.module.css';
 import {DialogsItem} from "./DialogsItem/DialogsItem.tsx";
 import {Massage} from "./Message/Message.tsx";
-import type {ActionType, MessagesPagesType} from "../../redux/state.ts";
+import {
+    type ActionType,
+    addDialogActionCreator,
+    type MessagesPagesType,
+    updateNewDialogElements
+} from "../../redux/state.ts";
 import {Button} from "../Button/Button.tsx";
 import * as React from "react";
 
@@ -11,17 +16,19 @@ type DialogsPropsType = {
     dispatch: (action: ActionType) => void
 }
 
+
+
 export const Dialogs = ({dialogsPages, dispatch}: DialogsPropsType) => {
     const newPost = React.createRef<HTMLTextAreaElement>();
 
     function dialogsPost() {
-        dispatch({type: 'DIALOGS-ADD-POST'})
+        dispatch(addDialogActionCreator())
     }
 
     const onDialogsChange = () => {
         if (newPost.current) {
             const text = newPost.current.value
-            dispatch({type: 'UPDATE-NEW-DIALOG-TEXT', newDialog: text})
+            dispatch(updateNewDialogElements(text))
         }
     }
     

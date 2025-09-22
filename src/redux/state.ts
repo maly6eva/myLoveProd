@@ -35,11 +35,34 @@ type UpdateNewPostTextAction = { type: 'UPDATE-NEW-POST-TEXT'; newPost: string }
 type DialogsAddPostAction = { type: 'DIALOGS-ADD-POST' }
 type UpdateNewDialogTextAction = { type: 'UPDATE-NEW-DIALOG-TEXT'; newDialog: string }
 
+
+export const addPostActionCreator = () => ({
+    type: 'ADD-POST' as const
+})
+
+export const updateNewPostsElements = (text: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT' as const,
+        newPost: text
+    }
+}
+
+export const addDialogActionCreator = () => ({
+    type: 'DIALOGS-ADD-POST' as const
+})
+
+export const updateNewDialogElements = (text: string) => ({
+    type: 'UPDATE-NEW-DIALOG-TEXT' as const,
+    newDialog: text
+
+
+})
+
 export type ActionType =
-    | AddPostAction
-    | UpdateNewPostTextAction
-    | DialogsAddPostAction
-    | UpdateNewDialogTextAction
+    | ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostsElements>
+    | ReturnType<typeof addDialogActionCreator>
+    | ReturnType<typeof updateNewDialogElements>
 
 export const addPostAC = (): AddPostAction => ({type: 'ADD-POST'})
 export const updateNewPostTextAC = (newPost: string): UpdateNewPostTextAction => ({
@@ -51,6 +74,12 @@ export const updateNewDialogTextAC = (newDialog: string): UpdateNewDialogTextAct
     type: 'UPDATE-NEW-DIALOG-TEXT',
     newDialog
 })
+
+
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const DIALOGS_ADD_POST = 'DIALOGS-ADD-POST'
+const UPDATE_NEW_DIALOG_TEXT = 'UPDATE-NEW-DIALOG-TEXT'
 
 export const store = {
     _state: {
@@ -93,7 +122,7 @@ export const store = {
     },
 
     dispatch(action: ActionType) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             const newPost = {
                 id: this._state.profilePages.postData.length + 1,
                 message: this._state.profilePages.newPostText,
@@ -102,10 +131,10 @@ export const store = {
             this._state.profilePages.postData.push(newPost);
             this._state.profilePages.newPostText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePages.newPostText = action.newPost
             this._callSubscriber(this._state)
-        } else if (action.type === 'DIALOGS-ADD-POST') {
+        } else if (action.type === DIALOGS_ADD_POST) {
             const newDialog = {
                 id: this._state.dialogsPages.messagesData.length + 1,
                 message: this._state.dialogsPages.newDialogText
@@ -113,7 +142,7 @@ export const store = {
             this._state.dialogsPages.messagesData.push(newDialog)
             this._state.dialogsPages.newDialogText = ''
             this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-DIALOG-TEXT') {
+        } else if (action.type ===  UPDATE_NEW_DIALOG_TEXT) {
             this._state.dialogsPages.newDialogText = action.newDialog
             this._callSubscriber(this._state)
         }
