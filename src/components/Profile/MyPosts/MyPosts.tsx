@@ -2,33 +2,30 @@ import s from './MyPosts.module.css'
 import {Button} from "../../Button/Button.jsx";
 import {Post} from "./Post/Post.tsx";
 import * as React from "react";
-import {
-    type ActionType,
-    type ProfilePagesType,
-} from "../../../redux/state.ts";
-import {addPostActionCreator, updateNewPostsElements} from "../../../redux/profile-reducer.ts";
-
-type MyPostProps = {
-    profilePages: ProfilePagesType
-    dispatch: (action: ActionType) => void
-}
+import {useDispatch, useSelector} from "react-redux";
+import type { RootState } from "../../../redux/redux-store.ts";
+import {addPost, updateNewPostText} from "../../../redux/profile-reducer.ts";
+import type {AppDispatch} from "../../../redux/redux-store.ts";
 
 
 
 
 
-export const MyPosts = ({profilePages, dispatch}: MyPostProps) => {
+export const MyPosts = () => {
+    const dispatch = useDispatch<AppDispatch>()
+    const profilePages = useSelector((state: RootState) => state.profilePages)
+
     const newElement = React.createRef<HTMLTextAreaElement>()
 
     const postsElements = () => {
-        dispatch(addPostActionCreator())
+        dispatch(addPost())
     }
 
 
     const onPostChange = () => {
         if (newElement.current) {
             const text = newElement.current.value
-            dispatch(updateNewPostsElements(text))
+            dispatch(updateNewPostText(text))
         }
     }
 
