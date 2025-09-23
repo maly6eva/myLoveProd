@@ -4,10 +4,9 @@ import {Post} from "./Post/Post.tsx";
 import * as React from "react";
 import {
     type ActionType,
-    addPostActionCreator,
     type ProfilePagesType,
-    updateNewPostsElements
 } from "../../../redux/state.ts";
+import {addPostActionCreator, updateNewPostsElements} from "../../../redux/profile-reducer.ts";
 
 type MyPostProps = {
     profilePages: ProfilePagesType

@@ -1,3 +1,6 @@
+import {profileReducer, type ProfileActionType} from "./profile-reducer.ts";
+import {type DialogsActionType, dialogsReducer} from "./dialogs-reducer.ts";
+
 export type StateTypeProps = {
     profilePages: ProfilePagesType
     dialogsPages: MessagesPagesType
@@ -30,56 +33,57 @@ export type MessagesDataProps = {
     message: string
 }
 
-type AddPostAction = { type: 'ADD-POST' }
-type UpdateNewPostTextAction = { type: 'UPDATE-NEW-POST-TEXT'; newPost: string }
-type DialogsAddPostAction = { type: 'DIALOGS-ADD-POST' }
-type UpdateNewDialogTextAction = { type: 'UPDATE-NEW-DIALOG-TEXT'; newDialog: string }
+// export type AddPostAction = { type: 'ADD-POST' }
+// export type UpdateNewPostTextAction = { type: 'UPDATE-NEW-POST-TEXT'; newPost: string }
+// export type DialogsAddPostAction = { type: 'DIALOGS-ADD-POST' }
+// export type UpdateNewDialogTextAction = { type: 'UPDATE-NEW-DIALOG-TEXT'; newDialog: string }
+
+//
+// export const addPostActionCreator = () => ({
+//     type: 'ADD-POST' as const
+// })
+//
+// export const updateNewPostsElements = (text: string) => {
+//     return {
+//         type: 'UPDATE-NEW-POST-TEXT' as const,
+//         newPost: text
+//     }
+// }
+
+// export const addDialogActionCreator = () => ({
+//     type: 'DIALOGS-ADD-POST' as const
+// })
+//
+// export const updateNewDialogElements = (text: string) => ({
+//     type: 'UPDATE-NEW-DIALOG-TEXT' as const,
+//     newDialog: text
+// })
+
+// export type ActionType =
+//     | ReturnType<typeof addPostActionCreator>
+//     | ReturnType<typeof updateNewPostsElements>
+//     | ReturnType<typeof addDialogActionCreator>
+//     | ReturnType<typeof updateNewDialogElements>
+
+// export const addPostAC = (): AddPostAction => ({type: 'ADD-POST'})
+// export const updateNewPostTextAC = (newPost: string): UpdateNewPostTextAction => ({
+//     type: 'UPDATE-NEW-POST-TEXT',
+//     newPost
+// })
+// export const dialogsAddPostAC = (): DialogsAddPostAction => ({type: 'DIALOGS-ADD-POST'})
+// export const updateNewDialogTextAC = (newDialog: string): UpdateNewDialogTextAction => ({
+//     type: 'UPDATE-NEW-DIALOG-TEXT',
+//     newDialog
+// })
 
 
-export const addPostActionCreator = () => ({
-    type: 'ADD-POST' as const
-})
-
-export const updateNewPostsElements = (text: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT' as const,
-        newPost: text
-    }
-}
-
-export const addDialogActionCreator = () => ({
-    type: 'DIALOGS-ADD-POST' as const
-})
-
-export const updateNewDialogElements = (text: string) => ({
-    type: 'UPDATE-NEW-DIALOG-TEXT' as const,
-    newDialog: text
+// const ADD_POST = 'ADD-POST'
+// const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+// const DIALOGS_ADD_POST = 'DIALOGS-ADD-POST'
+// const UPDATE_NEW_DIALOG_TEXT = 'UPDATE-NEW-DIALOG-TEXT'
 
 
-})
-
-export type ActionType =
-    | ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostsElements>
-    | ReturnType<typeof addDialogActionCreator>
-    | ReturnType<typeof updateNewDialogElements>
-
-export const addPostAC = (): AddPostAction => ({type: 'ADD-POST'})
-export const updateNewPostTextAC = (newPost: string): UpdateNewPostTextAction => ({
-    type: 'UPDATE-NEW-POST-TEXT',
-    newPost
-})
-export const dialogsAddPostAC = (): DialogsAddPostAction => ({type: 'DIALOGS-ADD-POST'})
-export const updateNewDialogTextAC = (newDialog: string): UpdateNewDialogTextAction => ({
-    type: 'UPDATE-NEW-DIALOG-TEXT',
-    newDialog
-})
-
-
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const DIALOGS_ADD_POST = 'DIALOGS-ADD-POST'
-const UPDATE_NEW_DIALOG_TEXT = 'UPDATE-NEW-DIALOG-TEXT'
+export type ActionType =  ProfileActionType | DialogsActionType
 
 export const store = {
     _state: {
@@ -108,7 +112,7 @@ export const store = {
                 {id: 5, message: "Yo"},
             ],
             newDialogText: 'Dima'
-        }
+        },
     } as StateTypeProps,
     _callSubscriber: (_state: StateTypeProps) => {
         console.log("rerenderEntireTree");
@@ -122,43 +126,15 @@ export const store = {
     },
 
     dispatch(action: ActionType) {
-        if (action.type === ADD_POST) {
-            const newPost = {
-                id: this._state.profilePages.postData.length + 1,
-                message: this._state.profilePages.newPostText,
-                likeCount: 0
-            }
-            this._state.profilePages.postData.push(newPost);
-            this._state.profilePages.newPostText = ''
-            this._callSubscriber(this._state)
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePages.newPostText = action.newPost
-            this._callSubscriber(this._state)
-        } else if (action.type === DIALOGS_ADD_POST) {
-            const newDialog = {
-                id: this._state.dialogsPages.messagesData.length + 1,
-                message: this._state.dialogsPages.newDialogText
-            }
-            this._state.dialogsPages.messagesData.push(newDialog)
-            this._state.dialogsPages.newDialogText = ''
-            this._callSubscriber(this._state)
-        } else if (action.type ===  UPDATE_NEW_DIALOG_TEXT) {
-            this._state.dialogsPages.newDialogText = action.newDialog
-            this._callSubscriber(this._state)
+        if (action.type === 'ADD-POST' || action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePages = profileReducer(this._state.profilePages, action);
         }
+        if (action.type === 'DIALOGS-ADD-POST' || action.type === 'UPDATE-NEW-DIALOG-TEXT') {
+            this._state.dialogsPages = dialogsReducer(this._state.dialogsPages, action);
+        }
+        this._callSubscriber(this._state);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -3,12 +3,11 @@ import {DialogsItem} from "./DialogsItem/DialogsItem.tsx";
 import {Massage} from "./Message/Message.tsx";
 import {
     type ActionType,
-    addDialogActionCreator,
     type MessagesPagesType,
-    updateNewDialogElements
 } from "../../redux/state.ts";
 import {Button} from "../Button/Button.tsx";
 import * as React from "react";
+import {addDialogActionCreator, updateNewDialogElements} from "../../redux/dialogs-reducer.ts";
 
 
 type DialogsPropsType = {
