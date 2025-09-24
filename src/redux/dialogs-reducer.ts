@@ -39,22 +39,57 @@ const dialogsSlice = createSlice({
     initialState,
     reducers: {
         dialogsAddPost(state) {
-            state.messagesData.push({
-                id: state.messagesData.length + 1,
-                message: state.newDialogText,
-            })
-            state.newDialogText = ""
+            return {
+                ...state,
+                messagesData: [
+                    ...state.messagesData,
+                    {
+                        id: state.messagesData.length + 1,
+                        message: state.newDialogText,
+                    }
+                ],
+                newDialogText: ''
+            }
+
         },
         updateNewPostDialogText(state, action: PayloadAction<string>) {
-            state.newDialogText = action.payload
-
+            return {
+                ...state,
+                newDialogText: action.payload
+            }
         }
-
     }
 })
 
 export const { dialogsAddPost, updateNewPostDialogText} = dialogsSlice.actions;
 export default dialogsSlice.reducer;
+///
+// const dialogsSlice = createSlice({
+//     name: 'dialog',
+//     initialState,
+//     reducers: {
+//         dialogsAddPost(state) {
+//             state.messagesData.push({
+//                 id: state.messagesData.length + 1,
+//                 message: state.newDialogText,
+//             })
+//             state.newDialogText = ""
+//         },
+//         updateNewPostDialogText(state, action: PayloadAction<string>) {
+//             state.newDialogText = action.payload
+//
+//         }
+//
+//     }
+// })
+//
+
+
+
+
+
+
+
 
 
 // import type {MessagesPagesType} from "./state.ts";

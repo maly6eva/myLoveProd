@@ -12,12 +12,12 @@ export type ProfilePagesType = {
 }
 
 const initialState: ProfilePagesType = {
-        postData: [
-            {id: 1, message: "Hi are you", likeCount: 1},
-            {id: 2, message: "Hi, I am ok", likeCount: 12},
-            {id: 3, message: "Dimasinka", likeCount: 123},
-        ],
-        newPostText: 'Ksenia'
+    postData: [
+        {id: 1, message: "Hi are you", likeCount: 1},
+        {id: 2, message: "Hi, I am ok", likeCount: 12},
+        {id: 3, message: "Dimasinka", likeCount: 123},
+    ],
+    newPostText: 'Ksenia'
 }
 
 const profileSlice = createSlice({
@@ -25,21 +25,50 @@ const profileSlice = createSlice({
     initialState,
     reducers: {
         addPost(state) {
-            state.postData.push({
-                id: state.postData.length + 1,
-                message: state.newPostText,
-                likeCount: 0
-            })
-            state.newPostText = ''
+            return {
+                ...state,
+                postData: [
+                    ...state.postData,
+                    {
+                        id: state.postData.length + 1,
+                        message: state.newPostText,
+                        likeCount: 0
+                    }
+                ],
+                newPostText: ''
+
+            }
         },
         updateNewPostText(state, action: PayloadAction<string>) {
-            state.newPostText = action.payload
+            return {
+                ...state,
+                newPostText: action.payload
+            }
         }
     }
 })
 
 export const {addPost, updateNewPostText} = profileSlice.actions
 export default profileSlice.reducer;
+
+
+// const profileSlice = createSlice({
+//     name: 'profile',
+//     initialState,
+//     reducers: {
+//         addPost(state) {
+//             state.postData.push({
+//                 id: state.postData.length + 1,
+//                 message: state.newPostText,
+//                 likeCount: 0
+//             })
+//             state.newPostText = ''
+//         },
+//         updateNewPostText(state, action: PayloadAction<string>) {
+//             state.newPostText = action.payload
+//         }
+//     }
+// })
 
 
 // import type {ProfilePagesType} from "./state.ts";
