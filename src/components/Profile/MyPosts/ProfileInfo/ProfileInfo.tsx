@@ -1,6 +1,6 @@
 
-import content from "../../../../images/content.webp"
-import mult from "../../../../images/multiashnaia.webp"
+import content from "../../../../../public/images/content.webp"
+import mult from "../../../../../public/images/multiashnaia.webp"
 import s from './ProfileInfo.module.css'
 
 export const ProfileInfo = () => {
