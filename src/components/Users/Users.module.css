@@ -5,7 +5,8 @@
 }
 .selectedPage{
     font-weight: 900;
-    color: #f31111;
+    font-size: 21px;
+
 }
 .loding{
     height: 200px;

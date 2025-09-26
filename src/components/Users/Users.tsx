@@ -12,7 +12,8 @@ import {
 } from '../../redux/users-reducer';
 import axios from "axios";
 import {useEffect} from "react";
-import loding from "../../images/loding.svg";
+import {Preloader} from "../common/Preloader.tsx";
+
 
 type PhotosProps = { small: string | null, large: string | null }
 
@@ -113,7 +114,7 @@ export const Users = () => {
             </div>
 
 
-            {isFetching ? <img src={loding} className={s.loding}/> : null}
+            {isFetching ? <Preloader/> : null}
             {/* Список пользователей */}
             {usersData.map(u => (
                 <div key={u.id} className={s.userItem}>
