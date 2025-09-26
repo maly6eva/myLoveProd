@@ -3,3 +3,11 @@
     height: 250px;
     border-radius: 30%;
 }
+.selectedPage{
+    font-weight: 900;
+    color: #f31111;
+}
+.loding{
+    height: 200px;
+    width: 200px;
+}

@@ -1,6 +1,6 @@
 
 import s from './Post.module.css'
-import kart from "../../../../../public/images/kart.webp";
+import kart from "../../../../images/kart.webp";
 
 
 type PostProps = {

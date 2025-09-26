@@ -1,5 +1,5 @@
 
-import avatar from "../../../public/images/avatark.webp";
+import avatar from "../../images/avatark.webp";
 import s from './Header.module.css';
 
 export const Header = () => {

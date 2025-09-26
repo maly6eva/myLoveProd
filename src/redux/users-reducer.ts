@@ -17,10 +17,18 @@ export type UsersProps = {
 
 export type UsersPropsType = {
     usersData: UsersProps[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
 }
 
 const initialState: UsersPropsType = {
     usersData: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false
 }
 
 const usersSlice = createSlice({
@@ -40,11 +48,20 @@ const usersSlice = createSlice({
         setusers(state, action: PayloadAction<UsersProps[]>) {
             state.usersData = action.payload
 
+        },
+        setCurrentPage(state, action: PayloadAction<number>) {
+            state.currentPage = action.payload
+        },
+        setTotalUserCount(state, action: PayloadAction<number>){
+            state.totalUsersCount = action.payload
+        },
+        toggleIsFetching(state, action: PayloadAction<boolean>) {
+            state.isFetching = action.payload
         }
     }
 })
 
-export const {follow, unfollow, setusers} = usersSlice.actions
+export const {follow, unfollow, setusers, setCurrentPage,  setTotalUserCount,  toggleIsFetching} = usersSlice.actions
 export default usersSlice.reducer;
 
 
