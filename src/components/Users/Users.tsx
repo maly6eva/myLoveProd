@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import {useEffect} from "react";
 import {Preloader} from "../common/Preloader.tsx";
+import {NavLink} from "react-router-dom";
 
 
 type PhotosProps = { small: string | null, large: string | null }
@@ -34,7 +35,13 @@ type UsersAPIPropsTypes = {
 
 export const Users = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const {usersData, pageSize, totalUsersCount, currentPage, isFetching} = useSelector((state: RootState) => state.usersPages);
+    const {
+        usersData,
+        pageSize,
+        totalUsersCount,
+        currentPage,
+        isFetching
+    } = useSelector((state: RootState) => state.usersPages);
 
     // Загрузка пользователей с API
     useEffect(() => {
@@ -55,8 +62,8 @@ export const Users = () => {
 
             } catch (err) {
                 console.error("Ошибка при загрузке пользователей:", err);
-            }finally{
-                dispatch(       toggleIsFetching(false))
+            } finally {
+                dispatch(toggleIsFetching(false))
             }
         }
         fetchUsers();
@@ -109,8 +116,7 @@ export const Users = () => {
                                 style={{cursor: "pointer"}}>
               {p}
             </span>
-                        )
-                )}
+                        ))}
             </div>
 
 
@@ -120,7 +126,10 @@ export const Users = () => {
                 <div key={u.id} className={s.userItem}>
           <span>
             <div>
-              <img src={u.photo} alt="" className={s.photoImg}/>
+                gebuger
+            <NavLink to={`/profile/${u.id}`}>
+                  <img src={u.photo} alt="" className={s.photoImg}/>
+            </NavLink>
             </div>
             <div>
               {u.followed

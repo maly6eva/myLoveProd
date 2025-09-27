@@ -6,9 +6,37 @@ export type ProfileProps = {
     likeCount: number
 }
 
+export type PhotosProps = {
+    small: string | null
+    large: string | null
+}
+
+
+export type ContactsType = {
+    facebook:  string | null
+    website:  string | null
+    vk:  string | null
+    twitter:  string | null
+    instagram:  string | null
+    youtube:  string | null
+    github:  string | null
+    mainLink:  string | null
+}
+
+export type ProfileType = {
+    aboutMe: string
+    contacts: ContactsType
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: PhotosProps
+}
+
 export type ProfilePagesType = {
     postData: ProfileProps[]
     newPostText: string
+    profile: ProfileType | null
 }
 
 const initialState: ProfilePagesType = {
@@ -17,7 +45,8 @@ const initialState: ProfilePagesType = {
         {id: 2, message: "Hi, I am ok", likeCount: 12},
         {id: 3, message: "Dimasinka", likeCount: 123},
     ],
-    newPostText: 'Ksenia'
+    newPostText: 'Ksenia',
+    profile: null
 }
 
 const profileSlice = createSlice({
@@ -44,11 +73,14 @@ const profileSlice = createSlice({
                 ...state,
                 newPostText: action.payload
             }
+        },
+        setUserProfile(state, action: PayloadAction<ProfileType>){
+            state.profile = action.payload
         }
     }
 })
 
-export const {addPost, updateNewPostText} = profileSlice.actions
+export const {addPost, updateNewPostText, setUserProfile} = profileSlice.actions
 export default profileSlice.reducer;
 
 
