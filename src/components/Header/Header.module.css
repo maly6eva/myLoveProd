@@ -11,3 +11,14 @@
     border-radius: 20px;
     display: block;
 }
+
+.loginBlock{
+    margin-left: auto;
+    color: #510909;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.loginButton{
+    border-radius: 50px;
+}
