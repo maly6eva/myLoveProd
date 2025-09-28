@@ -1,29 +1,43 @@
+import { useDispatch } from "react-redux";
 import { useState } from "react";
-import axios from "axios";
+import { setAuthData } from "../../redux/auth-reducer";
+import { authAPI } from "../../api/auth-api.ts"
+
 
 export const Login = () => {
-    const [isAuth, setIsAuth] = useState<boolean | null>(null);
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState("maly6eva.ksenia@gmail.com");
+    const [password, setPassword] = useState("");
 
     const handleLogin = async () => {
         try {
-            const response = await axios.get( "`/api/auth/me",
-                { withCredentials: true }
-            );
-
-            // Если resultCode === 0 — пользователь авторизован
-            setIsAuth(response.data.resultCode === 0);
+            const res = await authAPI.login(email, password);
+            if (res.data.resultCode === 0) {
+                const me = await authAPI.me();
+                dispatch(
+                    setAuthData({
+                        userId: me.data.data.id,
+                        email: me.data.data.email,
+                        login: me.data.data.login,
+                        isAuth: true,
+                    })
+                );
+            }
         } catch (err) {
-            console.error(err);
-            setIsAuth(false); // при ошибке тоже false
+            console.error("Login error:", err);
         }
     };
 
     return (
         <div>
-            <h2>Login Status</h2>
-            <button onClick={handleLogin}>
-                {isAuth === null ? "Login" : isAuth ? "true" : "false"}
-            </button>
+            <h2>Login</h2>
+            <input value={email} onChange={e => setEmail(e.target.value)} />
+            <input
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+            />
+            <button onClick={handleLogin}>Login</button>
         </div>
     );
 };

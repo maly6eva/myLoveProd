@@ -43,30 +43,9 @@ export const HeaderContainer = () => {
         }
     };
 
-    // Логин через кнопку (имитация успешного логина)
-    const handleLogin = async () => {
-        setLoading(true);
-        try {
-            dispatch(setAuthData({
-                userId: "1",
-                email: "maly6eva.ksenia@gmail.com",
-                login: "ksenia",
-                isAuth: true
-            }));
-
-            // Можно вызвать checkAuth для синхронизации с сервером, если есть реальные данные
-            // await checkAuth();
-        } catch (err) {
-            console.error("Ошибка при login:", err);
-            dispatch(setAuthData({ userId: null, email: null, login: null, isAuth: false }));
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
         checkAuth();
     }, []);
 
-    return <Header isAuth={isAuth} login={login} loading={loading} onLoginClick={handleLogin} />;
+    return <Header isAuth={isAuth} login={login} loading={loading}/>;
 };

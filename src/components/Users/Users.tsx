@@ -15,6 +15,9 @@ import {useEffect} from "react";
 import {Preloader} from "../common/Preloader.tsx";
 import {NavLink} from "react-router-dom";
 
+type FollowResponse = {
+    resultCode: number
+}
 
 type PhotosProps = { small: string | null, large: string | null }
 
@@ -32,6 +35,7 @@ type UsersAPIPropsTypes = {
     totalCount: number,
     error: string | null
 }
+
 
 export const Users = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -68,6 +72,47 @@ export const Users = () => {
         }
         fetchUsers();
     }, [dispatch, currentPage, pageSize]);
+
+    const handleUnfollow = async (userId: number) => {
+        try {
+            const response = await axios.delete<FollowResponse>(
+                `/api/follow/${userId}`,
+                {
+                    withCredentials: true,
+                    headers: {
+                        "API-KEY": "5ee5c717-0079-4390-a456-8cc718967925"
+                    },
+                }
+            );
+            if ( response.data.resultCode === 0) {
+                dispatch(unfollow(userId))
+            }
+        }catch(err) {
+            console.error("Ошибки", err)
+        }
+    }
+
+    const handleFollow = async (userId: number) => {
+        try {
+            const response = await axios.post<FollowResponse>(
+                `/api/follow/${userId}`,
+                {},
+                {
+                    withCredentials: true,
+                    headers: {
+                        "API-KEY": "5ee5c717-0079-4390-a456-8cc718967925"
+                    }
+                }
+            )
+            if (response.data.resultCode === 0) {
+                dispatch(follow(userId))
+            }
+        } catch (err) {
+            console.error("Ошибка при Follow:", err)
+        }
+    }
+
+
 
     // // Пагинация
     const blockSize = 5;
@@ -106,17 +151,17 @@ export const Users = () => {
             {/* Пагинация */}
             <div style={{display: "flex", gap: "8px", marginBottom: "10px"}}>
                 {pages.map((p, i) =>
-                        p === "..." ? (
-                            <span key={`dots-${i}`}> ... </span>
-                        ) : (
-                            <span
-                                key={p}
-                                className={currentPage === p ? s.selectedPage : ''}
-                                onClick={() => onClickPage(p as number)}
-                                style={{cursor: "pointer"}}>
+                    p === "..." ? (
+                        <span key={`dots-${i}`}> ... </span>
+                    ) : (
+                        <span
+                            key={p}
+                            className={currentPage === p ? s.selectedPage : ''}
+                            onClick={() => onClickPage(p as number)}
+                            style={{cursor: "pointer"}}>
               {p}
             </span>
-                        ))}
+                    ))}
             </div>
 
 
@@ -133,23 +178,25 @@ export const Users = () => {
             </div>
             <div>
               {u.followed
-                  ? <button onClick={() => dispatch(unfollow(u.id))}>Unfollow</button>
-                  : <button onClick={() => dispatch(follow(u.id))}>Follow</button>}
-            </div>
-          </span>
-                    <span>
-            <span>
-              <div>{u.fullName}</div>
-              <div>{u.status}</div>
+                  ? <button onClick={() =>  handleUnfollow(u.id)}
+                  >Unfollow</button>
+                  : <button onClick={() => handleFollow(u.id)}
+                  >Follow</button>}
+                      </div>
+                      </span>
+                      <span>
+                      <span>
+                      <div>{u.fullName}</div>
+                  <div>{u.status}</div>
             </span>
-            <span>
+                    <span>
               <div>{u.location.city}</div>
               <div>{u.location.country}</div>
             </span>
-          </span>
+                </span>
                 </div>
-            ))}
+                ))}
         </div>
-    );
+);
 }
 
