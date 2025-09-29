@@ -21,6 +21,7 @@ export type UsersPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: boolean
 }
 
 const initialState: UsersPropsType = {
@@ -28,7 +29,8 @@ const initialState: UsersPropsType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: false
 }
 
 const usersSlice = createSlice({
@@ -57,80 +59,14 @@ const usersSlice = createSlice({
         },
         toggleIsFetching(state, action: PayloadAction<boolean>) {
             state.isFetching = action.payload
+        },
+        toggleIsFollowingProgress(state, action: PayloadAction<boolean>) {
+            state.followingInProgress = action.payload
         }
     }
 })
 
-export const {follow, unfollow, setusers, setCurrentPage,  setTotalUserCount,  toggleIsFetching} = usersSlice.actions
+export const {follow, unfollow, setusers, setCurrentPage,  setTotalUserCount,  toggleIsFetching, toggleIsFollowingProgress} = usersSlice.actions
 export default usersSlice.reducer;
-
-
-// const profileSlice = createSlice({
-//     name: 'profile',
-//     initialState,
-//     reducers: {
-//         addPost(state) {
-//             state.postData.push({
-//                 id: state.postData.length + 1,
-//                 message: state.newPostText,
-//                 likeCount: 0
-//             })
-//             state.newPostText = ''
-//         },
-//         updateNewPostText(state, action: PayloadAction<string>) {
-//             state.newPostText = action.payload
-//         }
-//     }
-// })
-
-
-// import type {ProfilePagesType} from "./state.ts";
-//
-// const ADD_POST = 'ADD-POST' as const;
-// const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT' as const;
-//
-// export type AddPostAction = { type: typeof ADD_POST }
-// export type UpdateNewPostTextAction = { type: typeof UPDATE_NEW_POST_TEXT; newPost: string }
-//
-// export type ProfileActionType = AddPostAction | UpdateNewPostTextAction
-//
-// export const profileReducer = (
-//     state: ProfilePagesType,
-//     action: ProfileActionType
-// ): ProfilePagesType => {
-//     switch (action.type) {
-//         case ADD_POST: {
-//             const newPost = {
-//                 id: state.postData.length + 1,
-//                 message: state.newPostText,
-//                 likeCount: 0
-//             };
-//             return {
-//                 ...state,
-//                 postData: [...state.postData, newPost],
-//                 newPostText: ''
-//             };
-//         }
-//         case UPDATE_NEW_POST_TEXT:
-//             return {
-//                 ...state,
-//                 newPostText: action.newPost
-//             };
-//         default:
-//             return state;
-//     }
-// }
-//
-//
-// export const addPostActionCreator = () => (
-//     {type: ADD_POST} as const
-// )
-//
-// export const updateNewPostsElements = (text: string) => {
-//     return {
-//         type: UPDATE_NEW_POST_TEXT,
-//         newPost: text
-//     }as const
-// }
 
 

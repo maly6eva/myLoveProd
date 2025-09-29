@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { setAuthData } from "../../redux/auth-reducer";
-import { authAPI } from "../../api/auth-api.ts"
+import { authAPILogin } from "../../api/auth-api-login.ts"
 
 
 export const Login = () => {
@@ -11,9 +11,9 @@ export const Login = () => {
 
     const handleLogin = async () => {
         try {
-            const res = await authAPI.login(email, password);
+            const res = await authAPILogin.login(email, password);
             if (res.data.resultCode === 0) {
-                const me = await authAPI.me();
+                const me = await authAPILogin.me();
                 dispatch(
                     setAuthData({
                         userId: me.data.data.id,

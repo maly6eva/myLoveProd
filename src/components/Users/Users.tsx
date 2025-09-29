@@ -1,170 +1,26 @@
-import {useSelector, useDispatch} from "react-redux";
-import type {RootState, AppDispatch} from '../../redux/redux-store.ts';
 import s from './Users.module.css';
-import aVa from "../../images/aVa.webp"
-import {
-    follow,
-    unfollow,
-    setusers,
-    setCurrentPage,
-    setTotalUserCount,
-    toggleIsFetching
-} from '../../redux/users-reducer';
-import axios from "axios";
-import {useEffect} from "react";
 import {Preloader} from "../common/Preloader.tsx";
 import {NavLink} from "react-router-dom";
+import type {UsersProps} from "../../redux/users-reducer.ts";
+import {Pagination} from "../common/Pagination/Pagination.tsx";
 
-type FollowResponse = {
-    resultCode: number
+
+type UsersPropsType  = {
+    usersData: UsersProps[]
+    isFetching: boolean
+    currentPage: number
+    handleUnfollow: (userId: number) => void
+    handleFollow: (userId: number) => void
+    onClickPage: (page: number) => void
+    totalUsersCount: number
+    pageSize: number
 }
 
-type PhotosProps = { small: string | null, large: string | null }
-
-type UsersAPIProps = {
-    name: string,
-    id: number,
-    uniqueUrlName: string | null,
-    photos: PhotosProps,
-    status: string | null,
-    followed: boolean
-}
-
-type UsersAPIPropsTypes = {
-    items: UsersAPIProps[],
-    totalCount: number,
-    error: string | null
-}
-
-
-export const Users = () => {
-    const dispatch = useDispatch<AppDispatch>();
-    const {
-        usersData,
-        pageSize,
-        totalUsersCount,
-        currentPage,
-        isFetching
-    } = useSelector((state: RootState) => state.usersPages);
-
-    // Загрузка пользователей с API
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                dispatch(toggleIsFetching(true))
-                const response = await axios.get<UsersAPIPropsTypes>(`/api/users?page=${currentPage}&count=${pageSize}`);
-                const mappedUsers = response.data.items.map(u => ({
-                    id: u.id,
-                    followed: u.followed,
-                    fullName: u.name,
-                    status: u.status || "No status",
-                    photo: u.photos.small || aVa,
-                    location: {country: "Belarus", city: "Minsk"}
-                }));
-                dispatch(setusers(mappedUsers));
-                dispatch(setTotalUserCount(response.data.totalCount));
-
-            } catch (err) {
-                console.error("Ошибка при загрузке пользователей:", err);
-            } finally {
-                dispatch(toggleIsFetching(false))
-            }
-        }
-        fetchUsers();
-    }, [dispatch, currentPage, pageSize]);
-
-    const handleUnfollow = async (userId: number) => {
-        try {
-            const response = await axios.delete<FollowResponse>(
-                `/api/follow/${userId}`,
-                {
-                    withCredentials: true,
-                    headers: {
-                        "API-KEY": "5ee5c717-0079-4390-a456-8cc718967925"
-                    },
-                }
-            );
-            if ( response.data.resultCode === 0) {
-                dispatch(unfollow(userId))
-            }
-        }catch(err) {
-            console.error("Ошибки", err)
-        }
-    }
-
-    const handleFollow = async (userId: number) => {
-        try {
-            const response = await axios.post<FollowResponse>(
-                `/api/follow/${userId}`,
-                {},
-                {
-                    withCredentials: true,
-                    headers: {
-                        "API-KEY": "5ee5c717-0079-4390-a456-8cc718967925"
-                    }
-                }
-            )
-            if (response.data.resultCode === 0) {
-                dispatch(follow(userId))
-            }
-        } catch (err) {
-            console.error("Ошибка при Follow:", err)
-        }
-    }
-
-
-
-    // // Пагинация
-    const blockSize = 5;
-    const pagesCount = Math.ceil(totalUsersCount / pageSize);
-
-    const currentBlock = Math.ceil(currentPage / blockSize);
-
-    const startPage = (currentBlock - 1) * blockSize + 1;
-    const endPage = Math.min(currentBlock * blockSize, pagesCount);
-    //
-    const pages: (number | string)[] = [];
-
-    // Первая страница и "..."
-    if (startPage > 1) {
-        pages.push(1);
-        if (startPage > 2) pages.push("...");
-    }
-
-    // Текущий блок страниц
-    for (let i = startPage; i <= endPage; i++) {
-        pages.push(i);
-    }
-
-    // "..." и последняя страница
-    if (endPage < pagesCount) {
-        if (endPage < pagesCount - 1) pages.push("...");
-        pages.push(pagesCount);
-    }
-
-    const onClickPage = (page: number) => {
-        dispatch(setCurrentPage(page));
-    }
+export const Users = ({ usersData, isFetching, handleUnfollow, handleFollow, onClickPage,  currentPage, totalUsersCount, pageSize }: UsersPropsType) => {
 
     return (
         <div>
-            {/* Пагинация */}
-            <div style={{display: "flex", gap: "8px", marginBottom: "10px"}}>
-                {pages.map((p, i) =>
-                    p === "..." ? (
-                        <span key={`dots-${i}`}> ... </span>
-                    ) : (
-                        <span
-                            key={p}
-                            className={currentPage === p ? s.selectedPage : ''}
-                            onClick={() => onClickPage(p as number)}
-                            style={{cursor: "pointer"}}>
-              {p}
-            </span>
-                    ))}
-            </div>
-
-
+            <Pagination onClickPage={onClickPage} currentPage={currentPage} totalUsersCount={totalUsersCount} pageSize={pageSize}/>
             {isFetching ? <Preloader/> : null}
             {/* Список пользователей */}
             {usersData.map(u => (
