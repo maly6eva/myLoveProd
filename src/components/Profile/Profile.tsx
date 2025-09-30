@@ -9,6 +9,7 @@ import {useParams} from "react-router-dom";
 
 
 
+
 export const Profile = () => {
     const dispatch = useDispatch<AppDispatch>()
     const profilePages = useSelector((state: RootState) => state.profilePages)
@@ -30,6 +31,7 @@ export const Profile = () => {
 
         fetchProfile()
     }, [dispatch, userId])
+
 
     return (
         <div>
