@@ -2,7 +2,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import profileReducer from "./profile-reducer.ts";
 import dialogsReducer from "./dialogs-reducer.ts";
 import usersReducer from "./users-reducer.ts";
-import authReducer from "./auth-reducer.ts";
+import authReducer from "./auth-slice.ts";
 
 export const store = configureStore({
     reducer: {

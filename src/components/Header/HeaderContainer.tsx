@@ -1,51 +1,22 @@
 import { Header } from "./Header";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/redux-store";
-import { useEffect, useState } from "react";
-import { setAuthData } from "../../redux/auth-reducer";
-import axios from "axios";
+import { useEffect} from "react";
+import {checkAuth} from "../../redux/auth-slice.ts";
 
-export type AuthApiProps = {
-    resultCode: number;
-    messages: string[];
-    data: {
-        id: number;
-        email: string;
-        login: string;
-    };
-};
+
 
 export const HeaderContainer = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const { login, isAuth } = useSelector((state: RootState) => state.auth);
-    const [loading, setLoading] = useState(true);
+    const { login, isAuth, status } = useSelector((state: RootState) => state.auth);
 
-    // Проверка авторизации при монтировании
-    const checkAuth = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get<AuthApiProps>(
-                "/api/auth/me",
-                { withCredentials: true }
-            );
-
-            if (response.data.resultCode === 0) {
-                const { id, email, login } = response.data.data;
-                dispatch(setAuthData({ userId: id.toString(), email, login, isAuth: true }));
-            } else {
-                dispatch(setAuthData({ userId: null, email: null, login: null, isAuth: false }));
-            }
-        } catch (err) {
-            console.error("Ошибка при auth/me:", err);
-            dispatch(setAuthData({ userId: null, email: null, login: null, isAuth: false }));
-        } finally {
-            setLoading(false);
-        }
-    };
 
     useEffect(() => {
-        checkAuth();
-    }, []);
+       dispatch(checkAuth());
+    }, [dispatch]);
 
-    return <Header isAuth={isAuth} login={login} loading={loading}/>;
+    return <Header
+        isAuth={isAuth}
+        login={login}
+        loading={status === "loading"}/>;
 };

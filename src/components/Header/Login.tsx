@@ -1,43 +1,36 @@
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState, AppDispatch } from "../../redux/redux-store";
+import { loginUser } from "../../redux/auth-slice";
 import { useState } from "react";
-import { setAuthData } from "../../redux/auth-reducer";
-import { authAPILogin } from "../../api/auth-api-login.ts"
-
 
 export const Login = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const [email, setEmail] = useState("maly6eva.ksenia@gmail.com");
     const [password, setPassword] = useState("");
+    const { status, error } = useSelector((state: RootState) => state.auth);
 
-    const handleLogin = async () => {
-        try {
-            const res = await authAPILogin.login(email, password);
-            if (res.data.resultCode === 0) {
-                const me = await authAPILogin.me();
-                dispatch(
-                    setAuthData({
-                        userId: me.data.data.id,
-                        email: me.data.data.email,
-                        login: me.data.data.login,
-                        isAuth: true,
-                    })
-                );
-            }
-        } catch (err) {
-            console.error("Login error:", err);
-        }
+    const handleLogin = () => {
+        dispatch(loginUser({ email, password }));
     };
 
     return (
         <div>
             <h2>Login</h2>
-            <input value={email} onChange={e => setEmail(e.target.value)} />
+            <input value={email}
+                   onChange={e => setEmail(e.target.value)}
+                   placeholder="Email"
+            />
             <input
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
+                placeholder="Password"
             />
-            <button onClick={handleLogin}>Login</button>
+            <button onClick={handleLogin}
+                    disabled={status === "loading"}>
+                {status === "loading" ? "Logging in..." : "Login"}
+            </button>
+            {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
     );
 };

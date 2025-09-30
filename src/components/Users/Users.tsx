@@ -3,9 +3,11 @@ import {Preloader} from "../common/Preloader.tsx";
 import {NavLink} from "react-router-dom";
 import type {UsersProps} from "../../redux/users-reducer.ts";
 import {Pagination} from "../common/Pagination/Pagination.tsx";
+import {useSelector} from "react-redux";
+import type {RootState} from "../../redux/redux-store.ts";
 
 
-type UsersPropsType  = {
+type UsersPropsType = {
     usersData: UsersProps[]
     isFetching: boolean
     currentPage: number
@@ -16,31 +18,42 @@ type UsersPropsType  = {
     pageSize: number
 }
 
-export const Users = ({ usersData, isFetching, handleUnfollow, handleFollow, onClickPage,  currentPage, totalUsersCount, pageSize }: UsersPropsType) => {
+export const Users = ({
+                          usersData,
+                          isFetching,
+                          handleUnfollow,
+                          handleFollow,
+                          onClickPage,
+                          currentPage,
+                          totalUsersCount,
+                          pageSize,
+                      }: UsersPropsType) => {
+    const followingInProgress = useSelector(
+        (state: RootState) => state.usersPages.followingInProgress)
 
     return (
         <div>
-            <Pagination onClickPage={onClickPage} currentPage={currentPage} totalUsersCount={totalUsersCount} pageSize={pageSize}/>
+            <Pagination onClickPage={onClickPage} currentPage={currentPage} totalUsersCount={totalUsersCount}
+                        pageSize={pageSize}/>
             {isFetching ? <Preloader/> : null}
             {/* Список пользователей */}
             {usersData.map(u => (
                 <div key={u.id} className={s.userItem}>
           <span>
             <div>
-                gebuger
             <NavLink to={`/profile/${u.id}`}>
                   <img src={u.photo} alt="" className={s.photoImg}/>
             </NavLink>
             </div>
             <div>
               {u.followed
-                  ? <button onClick={() =>  handleUnfollow(u.id)}
+                  ? <button disabled={followingInProgress.includes(u.id)} onClick={() => handleUnfollow(u.id)}
                   >Unfollow</button>
-                  : <button onClick={() => handleFollow(u.id)}
+                  : <button disabled={followingInProgress.includes(u.id)} onClick={() => handleFollow(u.id)}
                   >Follow</button>}
                       </div>
                       </span>
-                      <span>
+                    <span>
                       <span>
                       <div>{u.fullName}</div>
                   <div>{u.status}</div>
@@ -51,8 +64,8 @@ export const Users = ({ usersData, isFetching, handleUnfollow, handleFollow, onC
             </span>
                 </span>
                 </div>
-                ))}
+            ))}
         </div>
-);
+    );
 }
 
