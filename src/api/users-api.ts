@@ -1,4 +1,5 @@
 import axios from "axios";
+import {profileAPI} from "./profile-api.ts";
 
 // ---------------- TYPES ----------------
 export type PhotosProps = { small: string | null; large: string | null };
@@ -45,4 +46,8 @@ export const usersAPI = {
     unfollow(userId: number) {
         return instance.delete<APIResponseType>(`follow/${userId}`);
     },
+    getProfile(userId: number) {
+        console.warn("Obsolete method")
+        return profileAPI.getProfile(userId)
+    }
 };
