@@ -83,13 +83,12 @@ const profileSlice = createSlice({
     initialState,
     reducers: {
         // работа с постами
-        addPost(state) {
+        addPost(state, action: PayloadAction<string>) {
             state.postData.push({
                 id: state.postData.length + 1,
-                message: state.newPostText,
+                message: action.payload,
                 likeCount: 0
             })
-            state.newPostText = '';
         },
         updateNewPostText(state, action: PayloadAction<string>) {
             state.newPostText = action.payload;

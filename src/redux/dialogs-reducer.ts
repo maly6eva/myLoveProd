@@ -39,28 +39,21 @@ const dialogsSlice = createSlice({
     name: 'dialog',
     initialState,
     reducers: {
-        dialogsAddPost(state) {
-            return {
-                ...state,
-                messagesData: [
-                    ...state.messagesData,
-                    {
-                        id: state.messagesData.length + 1,
-                        message: state.newDialogText,
-                    }
-                ],
-                newDialogText: ''
-            }
+        dialogsAddPost(state, action: PayloadAction<string>) {
+           state.messagesData.push({
+               id: state.messagesData.length + 1,
+               message: action.payload,
+           })
         },
-        updateNewPostDialogText(state, action: PayloadAction<string>) {
-            return {
-                ...state,
-                newDialogText: action.payload
-            }
-        }
+        // updateNewPostDialogText(state, action: PayloadAction<string>) {
+        //     return {
+        //         ...state,
+        //         newDialogText: action.payload
+        //     }
+        // }
     }
 })
 
-export const {dialogsAddPost, updateNewPostDialogText} = dialogsSlice.actions;
+export const {dialogsAddPost} = dialogsSlice.actions;
 export default dialogsSlice.reducer;
 
