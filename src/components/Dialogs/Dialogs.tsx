@@ -4,9 +4,10 @@ import {Massage} from "./Message/Message.tsx";
 import { useSelector} from "react-redux";
 import type {RootState} from "../../redux/redux-store.ts";
 import {DialogsTextarea} from "./DialogsTextarea.tsx";
+import {memo} from "react";
 
 
-export const Dialogs = () => {
+export const Dialogs = memo(() => {
     const dialogsPages = useSelector((state: RootState) => state.dialogsPages)
 
 
@@ -27,6 +28,6 @@ export const Dialogs = () => {
             </div>
         </div>
     );
-};
+});
 
 

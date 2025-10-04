@@ -4,12 +4,13 @@ import { dialogsAddPost } from "../../redux/dialogs-reducer.ts";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../../redux/redux-store.ts";
 import { Button } from "../Button/Button.tsx";
+import {memo} from "react";
 
 type FormValues = {
     message: string;
 };
 
-export const DialogsTextarea = () => {
+export const DialogsTextarea = memo(() => {
     const dispatch = useDispatch<AppDispatch>();
     const { register, handleSubmit, reset } = useForm<FormValues>();
 
@@ -31,5 +32,5 @@ export const DialogsTextarea = () => {
             <Button type="submit">Send</Button>
         </form>
     );
-};
+});
 

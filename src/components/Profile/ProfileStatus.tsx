@@ -1,9 +1,9 @@
-import {type ChangeEvent, useEffect, useRef, useState} from "react";
+import {type ChangeEvent, memo, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../redux/redux-store.ts";
 import {updateStatusThunk} from "../../redux/profile-reducer.ts";
 
-export const ProfileStatus = () => {
+export const ProfileStatus = memo(() => {
     const dispatch = useDispatch<AppDispatch>()
     const status = useSelector((state: RootState) => state.profilePages.status)
 
@@ -52,5 +52,5 @@ export const ProfileStatus = () => {
             )}
         </div>
     );
-}
+})
 

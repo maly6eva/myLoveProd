@@ -4,12 +4,13 @@ import s from './ProfileInfo.module.css'
 import type {ProfileType} from "../../../../redux/profile-reducer.ts";
 import {Preloader} from "../../../common/Preloader.tsx";
 import {ProfileStatus} from "../../ProfileStatus.tsx";
+import { memo } from "react";
 
 export type ProfileInfoProps = {
     profile: ProfileType | null;
 }
 
-export const ProfileInfo = ({profile}: ProfileInfoProps) => {
+export const ProfileInfo = memo(({profile}: ProfileInfoProps) => {
     if (!profile) {
         return <Preloader/>
     }
@@ -40,5 +41,5 @@ export const ProfileInfo = ({profile}: ProfileInfoProps) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+});

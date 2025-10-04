@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../../redux/redux-store.ts";
 import {useForm} from "react-hook-form";
 import {loginUser} from "../../../redux/auth-slice.ts";
-import {useEffect} from "react";
+import {memo, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
 
@@ -14,7 +14,7 @@ type LoginFormInputs = {
     rememberMe: boolean;
 }
 
-export const LoginForm = () => {
+export const LoginForm = memo(() => {
     const dispatch = useDispatch<AppDispatch>()
     const {status, error, isAuth} = useSelector((state: RootState) => state.auth)
     const navigate = useNavigate();
@@ -78,7 +78,7 @@ export const LoginForm = () => {
             </div>
         </form>
     );
-};
+});
 
 
 
