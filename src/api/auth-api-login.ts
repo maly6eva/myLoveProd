@@ -1,14 +1,19 @@
 import axios from "axios";
 
-type LoginResponse = {
+
+export type LoginResponse = {
     resultCode: number;
     messages: string[];
     data: { userId: number };
 };
 
-type MeResponse = {
+export type MeResponse = {
+    resultCode: number; // добавим resultCode, чтобы унифицировать логику
+    messages: string[];
     data: { id: number; email: string; login: string };
 };
+
+
 
 export const authAPILogin = {
     login(email: string, password: string) {

@@ -11,17 +11,19 @@ import {useParams} from "react-router-dom";
 export const Profile = () => {
     const dispatch = useDispatch<AppDispatch>()
     const profilePages = useSelector((state: RootState) => state.profilePages)
+    const auth = useSelector((state: RootState) => state.auth)
 
     // Берём userId из URL
     const { userId } = useParams<{ userId: string }>()
 
     useEffect(() => {
-        if (!userId) return; // если нет userId, не делаем запрос
+        const id = userId ? Number(userId) : auth.userId
+        if (!id) return; // если нет id, не делаем запрос
 
-        dispatch(getProfile(Number(userId)));
-        dispatch(getStatus(Number(userId)))
+        dispatch(getProfile(id));
+        dispatch(getStatus(id))
 
-    }, [dispatch, userId])
+    }, [dispatch, userId, auth.userId])
 
 
     return (

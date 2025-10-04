@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../../redux/redux-store.ts";
 import {useForm} from "react-hook-form";
 import {loginUser} from "../../../redux/auth-slice.ts";
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -14,7 +16,8 @@ type LoginFormInputs = {
 
 export const LoginForm = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const {status, error} = useSelector((state: RootState) => state.auth)
+    const {status, error, isAuth} = useSelector((state: RootState) => state.auth)
+    const navigate = useNavigate();
 
     const {
         register,
@@ -31,6 +34,13 @@ export const LoginForm = () => {
     const onSubmit = (data: LoginFormInputs) => {
         dispatch(loginUser({email: data.email, password: data.password}))
     }
+
+    useEffect(() => {
+        if(isAuth) {
+            navigate("/profile")
+        }
+    }, [isAuth, navigate])
+
     return (
         <form onSubmit={ handleSubmit(onSubmit)}>
             <div>
@@ -44,7 +54,7 @@ export const LoginForm = () => {
             </div>
 
             <div>
-                <input
+                <input style={{border: "red"}}
                 type="password"
                     {...register("password", {required: "Password is required"})}
                 placeholder="Password"/>
