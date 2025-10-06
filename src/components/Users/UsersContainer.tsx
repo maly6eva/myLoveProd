@@ -3,7 +3,7 @@ import type {RootState, AppDispatch} from '../../redux/redux-store.ts';
 import {
     setCurrentPage,
     fetchUsers, followUser, unfollowUser
-} from '../../redux/users-reducer';
+} from '../../redux/usersSlice';
 import {useEffect} from "react";
 import {Users} from "./Users.tsx";
 

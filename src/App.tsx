@@ -1,13 +1,23 @@
 import './App.css'
 import {Navbar} from "./components/Navbar/Navbar.jsx";
-import {Dialogs} from "./components/Dialogs/Dialogs.jsx";
-import { Outlet, Route, Routes} from "react-router-dom";
+import {Outlet, Route, Routes} from "react-router-dom";
 import {HeaderContainer} from "./components/Header/HeaderContainer.tsx";
 import {Login} from "./components/Header/Login/Login.tsx";
 import {UsersContainer} from "./components/Users/UsersContainer.tsx";
-import {DialogsContainer} from "./components/Dialogs/DialogContainer.tsx";
-import {ProfileContainer} from "./components/Profile/ProfileContainer.tsx";
+import React, {Suspense} from "react";
 
+const DialogsContainer =
+    React.lazy(() =>
+        import("./components/Dialogs/DialogContainer.tsx").then((module) => ({
+            default: module.DialogsContainer,
+        }))
+    )
+
+const ProfileContainer =
+    React.lazy(() =>
+        import("./components/Profile/ProfileContainer.tsx").then((module) => ({
+            default: module.ProfileContainer,
+        })))
 
 
 const Layout = () => {
@@ -29,20 +39,41 @@ function App() {
             <Route path='/' element={<Layout/>}>
                 <Route
                     path="dialogs"
-                    element={<DialogsContainer/>}/>
+                    element={
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <DialogsContainer/>
+                        </Suspense>
+                    }
+                />
                 <Route
                     path="dialogs/:id"
-                    element={<Dialogs/>}/>
+                    element={
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <DialogsContainer/>
+                        </Suspense>
+                    }
+                />
+
                 <Route
                     path="profile"
-                    element={<ProfileContainer/>}/>
+                    element={
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <ProfileContainer/>
+                        </Suspense>
+                    }
+                />
                 <Route
                     path="profile/:userId"
-                    element={<ProfileContainer/>}/>
+                    element={
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <ProfileContainer/>
+                        </Suspense>
+                    }
+                />
                 <Route
                     path="users"
                     element={<UsersContainer/>}/>
-                <Route path="login" element={<Login />} />
+                <Route path="login" element={<Login/>}/>
             </Route>
         </Routes>
 

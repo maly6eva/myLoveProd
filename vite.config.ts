@@ -1,8 +1,13 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
     plugins: [react()],
+    test: {
+        environment: 'jsdom', // нужно для тестов React
+        globals: true,        // чтобы не импортировать describe/it/expect
+        setupFiles: './src/setupTests.ts', // файл для jest-dom
+    },
     server: {
         proxy: {
             '/api': {
@@ -12,4 +17,5 @@ export default defineConfig({
             },
         },
     },
+
 })

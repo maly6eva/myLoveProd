@@ -1,8 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
-import profileReducer from "./profile-reducer.ts";
-import dialogsReducer from "./dialogs-reducer.ts";
-import usersReducer from "./users-reducer.ts";
-import authReducer from "./auth-slice.ts";
+import profileReducer from "./profileSlice.ts";
+import dialogsReducer from "./dialogsSlice.ts";
+import usersReducer from "./usersSlice.ts";
+import authReducer from "./authSlice.ts";
+
 
 export const store = configureStore({
     reducer: {

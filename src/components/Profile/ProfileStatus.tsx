@@ -1,7 +1,7 @@
 import {type ChangeEvent, memo, useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../redux/redux-store.ts";
-import {updateStatusThunk} from "../../redux/profile-reducer.ts";
+import {updateStatusThunk} from "../../redux/profileSlice.ts";
 
 export const ProfileStatus = memo(() => {
     const dispatch = useDispatch<AppDispatch>()

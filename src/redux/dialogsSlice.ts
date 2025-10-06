@@ -20,17 +20,10 @@ const initialState: MessagesPagesType = {
     dialogsData: [
         {id: 1, name: "Masha"},
         {id: 2, name: "Vika"},
-        {id: 3, name: "Lina"},
-        {id: 4, name: "Natasha"},
-        {id: 5, name: "Kira"},
-        {id: 6, name: "Masha"},
     ],
     messagesData: [
         {id: 1, message: "Hi, I am ok"},
         {id: 2, message: 'How ara you?'},
-        {id: 3, message: "Hi, I am ok"},
-        {id: 4, message: "Hi!"},
-        {id: 5, message: "Yo"},
     ],
     newDialogText: 'Dima'
 }
@@ -45,12 +38,6 @@ const dialogsSlice = createSlice({
                message: action.payload,
            })
         },
-        // updateNewPostDialogText(state, action: PayloadAction<string>) {
-        //     return {
-        //         ...state,
-        //         newDialogText: action.payload
-        //     }
-        // }
     }
 })
 

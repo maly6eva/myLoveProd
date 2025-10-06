@@ -1,6 +1,6 @@
 import s from "./Dialogs.module.css";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { dialogsAddPost } from "../../redux/dialogs-reducer.ts";
+import { dialogsAddPost } from "../../redux/dialogsSlice.ts";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../../redux/redux-store.ts";
 import { Button } from "../Button/Button.tsx";

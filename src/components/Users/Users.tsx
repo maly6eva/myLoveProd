@@ -1,7 +1,7 @@
 import s from './Users.module.css';
 import {Preloader} from "../common/Preloader.tsx";
 import {NavLink} from "react-router-dom";
-import type {UsersProps} from "../../redux/users-reducer.ts";
+import type {UsersProps} from "../../redux/usersSlice.ts";
 import {Pagination} from "../common/Pagination/Pagination.tsx";
 import {useSelector} from "react-redux";
 import type {RootState} from "../../redux/redux-store.ts";

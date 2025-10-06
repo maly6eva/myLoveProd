@@ -2,7 +2,7 @@ import { Header } from "./Header";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../redux/redux-store";
 import {memo, useEffect} from "react";
-import {checkAuth} from "../../redux/auth-slice.ts";
+import {checkAuth} from "../../redux/authSlice.ts";
 
 
 

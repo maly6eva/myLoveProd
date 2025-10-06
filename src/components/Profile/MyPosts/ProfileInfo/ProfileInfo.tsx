@@ -1,7 +1,7 @@
 import content from "../../../../images/content.webp"
 import mult from "../../../../images/multiashnaia.webp"
 import s from './ProfileInfo.module.css'
-import type {ProfileType} from "../../../../redux/profile-reducer.ts";
+import type {ProfileType} from "../../../../redux/profileSlice.ts";
 import {Preloader} from "../../../common/Preloader.tsx";
 import {ProfileStatus} from "../../ProfileStatus.tsx";
 import { memo } from "react";
@@ -24,7 +24,7 @@ export const ProfileInfo = memo(({profile}: ProfileInfoProps) => {
                          alt={profile.fullName}/>
                     <ProfileStatus/>
                     <h2>{profile.fullName}</h2>
-                    <p>{profile.aboutMe}</p>
+                    <p>{profile.aboutMe || "Информация о себе отсутствует."}</p>
                     <p>
                         {profile.lookingForAJob
                         ? `Ищу работу: ${profile.lookingForAJobDescription}`
@@ -32,9 +32,11 @@ export const ProfileInfo = memo(({profile}: ProfileInfoProps) => {
                         }
                     </p>
                     <h2>Контакты:</h2>
-                    <p>{profile.contacts.github}</p>
-                    <p>{profile.contacts.vk}</p>
-                    <p>{profile.contacts.facebook}</p>
+                    {Object.entries(profile.contacts).map(([key, value]) => (
+                        <p key={key}>
+                            <strong>{key}:</strong> {value || "нет"}
+                        </p>
+                    ))}
                 </div>
                 <div className={s.description}>
                     ava + description

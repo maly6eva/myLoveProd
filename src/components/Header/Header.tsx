@@ -4,7 +4,7 @@ import {Preloader} from "../common/Preloader.tsx";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import type {AppDispatch} from "../../redux/redux-store.ts";
-import {logoutUser} from "../../redux/auth-slice.ts";
+import {logoutUser} from "../../redux/authSlice.ts";
 import {Button} from "../Button/Button.tsx";
 
 type HeaderProps = {

@@ -1,5 +1,5 @@
 import s from "./MyPosts.module.css";
-import { addPost } from "../../../redux/profile-reducer.ts";
+import { addPost } from "../../../redux/profileSlice.ts";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import type { AppDispatch } from "../../../redux/redux-store.ts";
 import { useDispatch } from "react-redux";
