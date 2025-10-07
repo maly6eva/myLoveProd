@@ -1,12 +1,13 @@
 .textarea {
-    background-color: #d8d5cc;
-    border-radius: 15px;
     color: black;
+    border-radius: 15px;
+    background-color: #d8d5cc;
 }
-.description{
+
+.description {
     padding: 10px;
 }
 
-.post{
+.post {
     margin-top: 30px;
 }

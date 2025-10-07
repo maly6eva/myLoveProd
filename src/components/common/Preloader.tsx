@@ -7,5 +7,4 @@ export const Preloader = () => {
             <img src={loding} className={s.loding}/>
         </div>
     )
-
 }

@@ -1,41 +1,41 @@
 .button {
-    border: none;
-    cursor: pointer;
     font-weight: 600;
-    font-size: 16px;
-    padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    border-radius: 12px;
 }
 
-.button.one {
-    background-color: #371414;
+.one {
     color: white;
-    border: white;
+    background-color: #371414;
 }
-.button.two {
+
+.two {
+    color: white;
     background-color: #615ddf;
-    border: 5px solid #371414;
 }
-.button.tree {
+
+.three {
+    color: white;
     background-color: #62bd82;
-    border: 5px solid #cc5555;
 }
 
-.button.small {
-    padding: 0.5rem 1rem;
+.small {
     font-size: 14px;
+    padding: 0.25rem 0.75rem;
 }
 
-.button.medium {
-    padding: 0.75rem 1.5rem;
+.medium {
     font-size: 16px;
+    padding: 0.5rem 1rem;
 }
 
-.button.large {
-    padding: 1rem 2rem;
+.large {
     font-size: 18px;
+    padding: 0.75rem 1.25rem;
 }
+

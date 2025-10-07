@@ -33,10 +33,10 @@ const dialogsSlice = createSlice({
     initialState,
     reducers: {
         dialogsAddPost(state, action: PayloadAction<string>) {
-           state.messagesData.push({
-               id: state.messagesData.length + 1,
-               message: action.payload,
-           })
+            state.messagesData.push({
+                id: state.messagesData.length + 1,
+                message: action.payload,
+            })
         },
     }
 })

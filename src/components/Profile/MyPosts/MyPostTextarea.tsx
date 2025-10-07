@@ -1,9 +1,9 @@
 import s from "./MyPosts.module.css";
-import { addPost } from "../../../redux/profileSlice.ts";
-import { type SubmitHandler, useForm } from "react-hook-form";
-import type { AppDispatch } from "../../../redux/redux-store.ts";
-import { useDispatch } from "react-redux";
-import { Button } from "../../Button/Button.tsx";
+import {addPost} from "../../../redux/profileSlice.ts";
+import {type SubmitHandler, useForm} from "react-hook-form";
+import type {AppDispatch} from "../../../redux/redux-store.ts";
+import {useDispatch} from "react-redux";
+import {Button} from "../../Button/Button.tsx";
 
 type PostForm = {
     post: string;
@@ -11,7 +11,7 @@ type PostForm = {
 
 export const MyPostTextarea = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const { register, handleSubmit, reset } = useForm<PostForm>();
+    const {register, handleSubmit, reset} = useForm<PostForm>();
 
     const onSubmit: SubmitHandler<PostForm> = (data) => {
         if (data.post.trim()) {
@@ -28,7 +28,7 @@ export const MyPostTextarea = () => {
                 cols={30}
                 rows={5}
             />
-            <Button type="submit" text="Add post" numb="one" />
+            <Button type="submit" text="Add post" numb="one"/>
         </form>
     );
 };

@@ -30,7 +30,7 @@ export const Header = ({isAuth, login, loading}: HeaderProps) => {
                 ) : isAuth ? (
                     <>
                         <span>{login}</span>
-                        <Button onClick={handleLogout} text="Logout" />
+                        <Button onClick={handleLogout} text="Logout"/>
                     </>
                 ) : (
                     <>

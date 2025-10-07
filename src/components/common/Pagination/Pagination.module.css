@@ -1,16 +1,16 @@
 .pagination {
     display: flex;
     align-items: center;
-    gap: 8px;
     margin-top: 20px;
+    gap: 8px;
 }
 
 .page {
     padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
     cursor: pointer;
     transition: 0.2s;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
 .page:hover {
@@ -18,18 +18,18 @@
 }
 
 .selectedPage {
-    background-color: #007bff;
     color: white;
-    border-color: #007bff;
+    border-color: #c26565;
+    background-color: #c26565;
 }
 
 .navButton {
     padding: 6px 12px;
-    border: none;
-    background-color: #eee;
-    border-radius: 6px;
     cursor: pointer;
     transition: 0.2s;
+    border: none;
+    border-radius: 6px;
+    background-color: #eee;
 }
 
 .navButton:hover:not(:disabled) {
@@ -37,6 +37,6 @@
 }
 
 .navButton:disabled {
-    opacity: 0.5;
     cursor: default;
+    opacity: 0.5;
 }

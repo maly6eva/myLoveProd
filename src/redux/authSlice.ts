@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { authAPILogin } from "../api/auth-api-login.ts";
+import {createAsyncThunk, createSlice, type PayloadAction} from "@reduxjs/toolkit";
+import {authAPILogin} from "../api/auth-api-login.ts";
 
 type AuthState = {
     userId: number | null;
@@ -26,7 +26,7 @@ export const loginUser = createAsyncThunk<
     { rejectValue: string }
 >(
     "auth/loginUser",
-    async ({ email, password }, { rejectWithValue }) => {
+    async ({email, password}, {rejectWithValue}) => {
         try {
             const res = await authAPILogin.login(email, password);
             if (res.data.resultCode === 0) {
@@ -52,7 +52,7 @@ export const loginUser = createAsyncThunk<
 // CHECK AUTH
 export const checkAuth = createAsyncThunk(
     "auth/checkAuth",
-    async (_, { rejectWithValue }) => {
+    async (_, {rejectWithValue}) => {
         try {
             const me = await authAPILogin.me();
             if (me.data.resultCode === 0) {

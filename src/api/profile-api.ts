@@ -1,5 +1,6 @@
 import type {APIResponseType} from "./users-api.ts";
 import axios from "axios";
+import type {ProfileType} from "../redux/profileSlice.ts";
 
 const instance = axios.create({
     baseURL: "/api/",
@@ -19,5 +20,7 @@ export const profileAPI = {
     updateStatus(status: string) {
         return instance.put<APIResponseType>(`profile/status`, {status});
     },
-
+    saveProfile(profileData: ProfileType) {
+        return instance.put(`/profile`, profileData);
+    }
 }

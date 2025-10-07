@@ -1,4 +1,3 @@
-
 import s from './Post.module.css'
 import kart from "../../../../images/kart.webp";
 
@@ -8,7 +7,7 @@ type PostProps = {
     likeCount: number;
 }
 
-export const Post = ({message, likeCount}:  PostProps ) => {
+export const Post = ({message, likeCount}: PostProps) => {
     return (
         <div className={s.item}>
             <img className={s.kart} src={kart} alt=""/>

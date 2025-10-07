@@ -1,8 +1,8 @@
 import s from './MyPosts.module.css';
-import { Post } from "./Post/Post.tsx";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../../redux/redux-store.ts";
-import { MyPostTextarea } from "./MyPostTextarea.tsx";
+import {Post} from "./Post/Post.tsx";
+import {useSelector} from "react-redux";
+import type {RootState} from "../../../redux/redux-store.ts";
+import {MyPostTextarea} from "./MyPostTextarea.tsx";
 import {memo} from "react";
 
 export const MyPosts = memo(() => {

@@ -1,14 +1,16 @@
-.photoImg{
+.photoImg {
     width: 200px;
     height: 250px;
     border-radius: 30%;
 }
-.selectedPage{
-    font-weight: 900;
+
+.selectedPage {
     font-size: 21px;
+    font-weight: 900;
 
 }
-.loding{
-    height: 100px;
+
+.loding {
     width: 100px;
+    height: 100px;
 }

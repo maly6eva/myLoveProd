@@ -1,7 +1,7 @@
 import s from './Dialogs.module.css';
 import {DialogsItem} from "./DialogsItem/DialogsItem.tsx";
 import {Massage} from "./Message/Message.tsx";
-import { useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import type {RootState} from "../../redux/redux-store.ts";
 import {DialogsTextarea} from "./DialogsTextarea.tsx";
 import {memo} from "react";
@@ -12,9 +12,6 @@ export const Dialogs = memo(() => {
     const dialogsPages = useSelector<RootState, MessagesPagesType>(
         (state) => state.dialogsPages
     );
-
-
-
 
     return (
         <div className={s.dialogs}>

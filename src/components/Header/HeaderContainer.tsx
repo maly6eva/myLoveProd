@@ -1,18 +1,17 @@
-import { Header } from "./Header";
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../redux/redux-store";
+import {Header} from "./Header";
+import {useDispatch, useSelector} from "react-redux";
+import type {AppDispatch, RootState} from "../../redux/redux-store";
 import {memo, useEffect} from "react";
 import {checkAuth} from "../../redux/authSlice.ts";
 
 
-
 export const HeaderContainer = memo(() => {
     const dispatch = useDispatch<AppDispatch>();
-    const { login, isAuth, status } = useSelector((state: RootState) => state.auth);
+    const {login, isAuth, status} = useSelector((state: RootState) => state.auth);
 
 
     useEffect(() => {
-       dispatch(checkAuth());
+        dispatch(checkAuth());
     }, [dispatch]);
 
     return <Header

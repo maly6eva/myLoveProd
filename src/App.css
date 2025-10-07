@@ -1,47 +1,48 @@
 body {
-  margin: 0;
-  padding: 0;
-  /*height: 100vh;*/
-  /*display: flex;*/
-  justify-content: center;
-  align-items: center;
-  background-color: #272525; /* фон страницы */
+    align-items: center;
+    justify-content: center;
+    /*height: 100vh;*/
+    /*display: flex;*/
+    margin: 0;
+    padding: 0;
+    background-color: #272525; /* фон страницы */
 }
 
 .app-wrapper {
-  display: grid;
-  margin: 0 auto;
-  width: 1400px;
+    display: grid;
+    width: 1400px;
+    margin: 0 auto;
 
-  grid-template-areas:
+    background-color: burlywood;
+    grid-template-areas:
   'h h'
   'n c';
-  grid-template-rows: 60px 1fr;
-  grid-template-columns: 2fr 10fr;
-  background-color: burlywood;
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
 }
 
 .app-wrapper-content {
-    grid-area: c;
-    background-color:  burlywood;
-    padding: 20px;
-    color: #45321f;
     font-size: 20px;
     font-weight: bold;
+    padding: 20px;
+    color: #45321f;
+    background-color: burlywood;
+    grid-area: c;
 }
+
 /* ОБЩЕЕ */
 a {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
 }
 
 .contentImg {
+    display: block;
     width: 100%;
     max-width: 100%;
-    display: block;
+    margin: 0 0 20px 0;
     border-radius: 3%;
-    margin: 0  0 20px 0;
 }
 
 .kart {

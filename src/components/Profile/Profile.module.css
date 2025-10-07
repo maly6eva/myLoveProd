@@ -1,12 +1,117 @@
-.contentImg {
-    width: 100%;
-    max-width: 100%;
-    display: block;
-    border-radius: 3%;
-    margin: 0  0 20px 0;
+.profileContainer {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    background-color: #f9fafb;
 }
 
-.kart {
-    width: 160px;
-    border-radius: 15px;
+.profileCard {
+    font-family: "Inter", sans-serif;
+    width: 600px;
+    padding: 24px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    gap: 16px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border: 2px solid #d1d5db;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.headerInfo {
+    flex: 1;
+}
+
+.name {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    gap: 10px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+p {
+    font-size: 15px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    color: #444;
+    gap: 8px;
+}
+
+.contactsList {
+    padding: 0;
+    list-style: none;
+}
+
+.contactItem {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.input {
+    font-size: 14px;
+    width: 250px;
+    padding: 6px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+}
+
+.editField {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.editButton {
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.2s;
+    color: #2563eb;
+    border: none;
+    background: none;
+}
+
+.editButton:hover {
+    color: #1d4ed8;
+}
+
+.saveButton {
+    font-size: 14px;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    background-color: #2563eb;
+}
+
+.saveButton:hover {
+    background-color: #1d4ed8;
 }

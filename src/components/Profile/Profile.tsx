@@ -44,28 +44,27 @@ import {useParams} from "react-router-dom";
 import {Preloader} from "../common/Preloader.tsx";
 
 
-
 export const Profile = memo(() => {
     const dispatch = useDispatch<AppDispatch>()
 
-    const {profile,  loading, error } = useSelector((state: RootState) => state.profilePages)
+    const {profile, loading, error} = useSelector((state: RootState) => state.profilePages)
     const authUserId = useSelector((state: RootState) => state.auth.userId)
 
     // Берём userId из URL
-    const { userId } = useParams<{ userId: string }>()
+    const {userId} = useParams<{ userId: string }>()
 
     useEffect(() => {
         const id = userId ? Number(userId) : authUserId
-        if (!id ) return; // если нет id, не делаем запрос
+        if (!id) return; // если нет id, не делаем запрос
 
         dispatch(getProfile((id)));
         dispatch(getStatus((id)))
 
     }, [dispatch, userId, authUserId])
 
-    if (loading) return <Preloader />;
+    if (loading) return <Preloader/>;
 
-    if (error) return <div style={{ color: "red" }}>Ошибка загрузки профиля: {error}</div>;
+    if (error) return <div style={{color: "red"}}>Ошибка загрузки профиля: {error}</div>;
 
     return (
         <div>

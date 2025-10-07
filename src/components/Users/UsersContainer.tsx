@@ -21,31 +21,31 @@ export const UsersContainer = () => {
     // Загрузка пользователей с API
     useEffect(() => {
         dispatch(fetchUsers({page: currentPage, pageSize}))
-    },           [dispatch, currentPage, pageSize]);
+    }, [dispatch, currentPage, pageSize]);
 
-        const handleFollow =  (userId: number) => {
-            dispatch(followUser(userId))
-        }
+    const handleFollow = (userId: number) => {
+        dispatch(followUser(userId))
+    }
 
-        const handleUnfollow = (userId: number) => {
-            dispatch(unfollowUser(userId))
-        }
+    const handleUnfollow = (userId: number) => {
+        dispatch(unfollowUser(userId))
+    }
 
-        const onClickPage = (page: number) => {
-            dispatch(setCurrentPage(page))
-        }
+    const onClickPage = (page: number) => {
+        dispatch(setCurrentPage(page))
+    }
 
     return (
-       <Users
-           usersData={ usersData}
-           isFetching={isFetching}
-           handleUnfollow={handleUnfollow}
-           handleFollow={handleFollow}
-           onClickPage={onClickPage}
-           currentPage={currentPage}
-           totalUsersCount={totalUsersCount}
-           pageSize={pageSize}
-       />
+        <Users
+            usersData={usersData}
+            isFetching={isFetching}
+            handleUnfollow={handleUnfollow}
+            handleFollow={handleFollow}
+            onClickPage={onClickPage}
+            currentPage={currentPage}
+            totalUsersCount={totalUsersCount}
+            pageSize={pageSize}
+        />
     );
 };
 

@@ -1,24 +1,24 @@
 .header {
-    grid-area: h;
-    background-color: burlywood;
     display: flex;
     align-items: center;
     padding: 20px;
+    background-color: burlywood;
+    grid-area: h;
 }
 
 .headerAvatar {
+    display: block;
     width: 70px;
     border-radius: 20px;
-    display: block;
 }
 
-.loginBlock{
-    margin-left: auto;
-    color: #510909;
+.loginBlock {
     font-size: 25px;
     font-weight: bold;
+    margin-left: auto;
+    color: #510909;
 }
 
-.loginButton{
+.loginButton {
     border-radius: 50px;
 }

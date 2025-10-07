@@ -18,7 +18,7 @@ export const ProfileStatus = memo(() => {
     }, [status])
 
     useEffect(() => {
-        if(editMode && inputRef.current){
+        if (editMode && inputRef.current) {
             inputRef.current.focus()
         }
     }, [editMode])
@@ -29,7 +29,7 @@ export const ProfileStatus = memo(() => {
 
     const deactivateEditMode = () => {
         setEditMode(false)
-        if(localStatus !== status){
+        if (localStatus !== status) {
             dispatch(updateStatusThunk(localStatus))
         }
     }
